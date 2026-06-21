@@ -28,7 +28,7 @@ html, body{
 ========================= */
 .header{
     text-align:center;
-    padding:50px 20px 20px;
+    padding:60px 20px 20px;
 }
 
 .header h1{
@@ -37,8 +37,8 @@ html, body{
 }
 
 .header p{
-    color:#666;
     font-size:18px;
+    color:#666;
     margin-top:10px;
 }
 
@@ -48,12 +48,12 @@ html, body{
 .wall{
     max-width:1100px;
     margin:0 auto;
-    padding:30px 20px 80px;
+    padding:30px 20px 120px;
 
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
-    gap:25px;
+    gap:28px;
 }
 
 /* =========================
@@ -62,17 +62,25 @@ html, body{
 .polaroid{
     width:280px;
     background:white;
-    padding:15px 15px 40px;
+    padding:15px 15px 42px;
     border-radius:6px;
 
     box-shadow:0 12px 28px rgba(0,0,0,0.18);
 
-    transform: rotate(var(--r, 0deg));
-    transition:0.3s ease;
+    transform: translateY(40px) rotate(var(--r, 0deg));
+    opacity:0;
 
+    transition: all 0.8s ease;
     position:relative;
 }
 
+/* stato visibile */
+.polaroid.show{
+    transform: translateY(0) rotate(var(--r, 0deg));
+    opacity:1;
+}
+
+/* hover leggero */
 .polaroid:hover{
     transform: scale(1.04) rotate(0deg);
 }
@@ -86,16 +94,7 @@ html, body{
     display:block;
 }
 
-/* testo sotto foto */
-.caption{
-    margin-top:12px;
-    font-size:14px;
-    color:#666;
-    font-style:italic;
-    text-align:center;
-}
-
-/* titolo piccolo sopra */
+/* titolo */
 .title{
     font-size:16px;
     font-weight:bold;
@@ -103,12 +102,21 @@ html, body{
     text-align:center;
 }
 
+/* caption */
+.caption{
+    margin-top:10px;
+    font-size:14px;
+    color:#666;
+    font-style:italic;
+    text-align:center;
+}
+
 /* =========================
-   STORY TEXT SECTION
+   STORY BLOCK
 ========================= */
-.story-block{
-    max-width:800px;
-    margin:60px auto;
+.story{
+    max-width:850px;
+    margin:80px auto;
     padding:0 20px;
 
     font-size:20px;
@@ -116,36 +124,17 @@ html, body{
     text-align:center;
 }
 
-.story-block p{
+.story p{
     margin-bottom:25px;
 }
 
-/* separatore elegante */
+/* separatore */
 .separator{
-    width:80px;
+    width:70px;
     height:2px;
     background:#c2b49a;
     margin:30px auto;
-}
-
-/* =========================
-   ANIMATION
-========================= */
-.polaroid{
-    opacity:0;
-    transform: translateY(30px) rotate(var(--r, 0deg));
-    animation:fadeIn 0.8s forwards;
-}
-
-.polaroid:nth-child(1){ animation-delay:0.1s; }
-.polaroid:nth-child(2){ animation-delay:0.2s; }
-.polaroid:nth-child(3){ animation-delay:0.3s; }
-
-@keyframes fadeIn{
-    to{
-        opacity:1;
-        transform: translateY(0) rotate(var(--r, 0deg));
-    }
+    opacity:0.7;
 }
 
 /* =========================
@@ -165,7 +154,7 @@ html, body{
         height:220px;
     }
 
-    .story-block{
+    .story{
         font-size:18px;
     }
 }
@@ -178,7 +167,7 @@ html, body{
 <!-- HEADER -->
 <div class="header">
     <h1>La Nostra Storia</h1>
-    <p>Ogni ricordo è una fotografia appesa al tempo</p>
+    <p>Ogni ricordo emerge quando sei pronto a vederlo</p>
 </div>
 
 <!-- WALL -->
@@ -187,25 +176,25 @@ html, body{
     <div class="polaroid" style="--r:-2deg">
         <img src="foto1.jpg">
         <div class="title">Le Tre Cime di Lavaredo</div>
-        <div class="caption">4 ore di camminata sotto il sole cocente</div>
+        <div class="caption">4 ore sotto il sole cocente</div>
     </div>
 
     <div class="polaroid" style="--r:2deg">
         <img src="foto2.jpg">
-        <div class="title">Il Sentiero del Silenzio</div>
-        <div class="caption">Passi lenti, aria fredda, testa leggera</div>
+        <div class="title">Sentiero del Silenzio</div>
+        <div class="caption">Passi lenti, aria leggera</div>
     </div>
 
     <div class="polaroid" style="--r:-1deg">
         <img src="foto3.jpg">
         <div class="title">Il Tramonto in quota</div>
-        <div class="caption">Quando il cielo si è fermato per un attimo</div>
+        <div class="caption">Quando il cielo si è fermato</div>
     </div>
 
 </div>
 
-<!-- STORY BLOCK -->
-<div class="story-block">
+<!-- STORY -->
+<div class="story">
 
     <p>
         Quattro ore di camminata sotto un sole cocente, chilometri macinati
@@ -215,18 +204,41 @@ html, body{
     <div class="separator"></div>
 
     <p>
-        Un percorso che non regala scorciatoie: solo fatica, silenzio e panorami
-        che ti costringono a fermarti.
+        Un percorso che non concede scorciatoie: solo salita, respiro corto
+        e silenzi enormi tra le montagne.
     </p>
 
     <div class="separator"></div>
 
     <p>
         E poi quel momento in cui ti fermi e capisci che ogni passo
-        era esattamente dove dovevi essere.
+        era esattamente quello giusto.
     </p>
 
 </div>
+
+<script>
+
+/* =========================
+   INTERSECTION OBSERVER
+========================= */
+const cards = document.querySelectorAll('.polaroid');
+
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+},{
+    threshold:0.2
+});
+
+cards.forEach(card=>{
+    observer.observe(card);
+});
+
+</script>
 
 </body>
 </html>
