@@ -1,1 +1,145 @@
-<h1>Matrimonio</h1>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>La nostra storia</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Georgia, serif;
+    background:#f8f5ef;
+    color:#333;
+    text-align:center;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+h1{
+    margin-top:40px;
+}
+
+button{
+    background:#6f8f72;
+    color:white;
+    border:none;
+    padding:14px 28px;
+    border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+img{
+    width:100%;
+    border-radius:15px;
+    margin-top:20px;
+}
+
+#content{
+    display:none;
+    animation:fadeIn 1s;
+}
+
+#story{
+    margin-top:25px;
+    font-size:18px;
+    line-height:1.7;
+}
+
+#joke{
+    margin-top:20px;
+    font-size:20px;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="title"></h1>
+
+<p>
+Ogni tavolo racconta un piccolo pezzo della nostra storia ❤️
+</p>
+
+<button onclick="showStory()">
+Scopri la storia
+</button>
+
+<div id="content">
+
+<img id="photo">
+
+<div id="story"></div>
+
+<div id="joke"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const tables = {
+
+1:{
+title:"🏔️ Tavolo Monviso",
+photo:"foto1.jpg",
+story:"Qui abbiamo affrontato una lunga salita, qualche imprecazione e molte risate.",
+joke:"😄 Se siete qui, significa che ci fidiamo di voi più del GPS."
+},
+
+2:{
+title:"🏔️ Tavolo Gran Paradiso",
+photo:"foto2.jpg",
+story:"Una giornata perfetta, una vista incredibile e un panino memorabile.",
+joke:"😄 Speriamo che il percorso verso il buffet sia più semplice del nostro."
+},
+
+3:{
+title:"🏔️ Tavolo Dolomiti",
+photo:"foto3.jpg",
+story:"Una delle escursioni più belle che abbiamo fatto insieme.",
+joke:"😄 Nessuno si è perso. Evento storico."
+}
+
+};
+
+const params = new URLSearchParams(window.location.search);
+
+const tavolo = params.get("t") || "1";
+
+const data = tables[tavolo];
+
+document.getElementById("title").innerText = data.title;
+
+function showStory(){
+
+document.getElementById("content").style.display = "block";
+
+document.getElementById("photo").src = data.photo;
+
+document.getElementById("story").innerHTML = data.story;
+
+document.getElementById("joke").innerHTML =
+data.joke +
+"<br><br><strong>Grazie per essere qui con noi ❤️</strong>";
+
+}
+
+</script>
+
+</body>
+</html>
