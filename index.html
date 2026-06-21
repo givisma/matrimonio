@@ -32,74 +32,112 @@ body{
 }
 
 /* =========================
-   ENVELOPE (MIGLIORATA)
+   ENVELOPE PREMIUM
 ========================= */
 .envelope{
     width:100%;
     max-width:820px;
     position:relative;
-    perspective:1400px;
+    perspective:1600px;
 }
 
-/* base della busta */
+/* corpo lettera */
 .container{
     background:#f6f1e4;
     border-radius:18px;
-    padding:35px 22px 55px;
+    padding:38px 22px 55px;
     text-align:center;
 
     box-shadow:
-        0 25px 55px rgba(0,0,0,0.28),
-        0 2px 10px rgba(0,0,0,0.15);
+        0 30px 60px rgba(0,0,0,0.30),
+        0 3px 12px rgba(0,0,0,0.18);
 
     position:relative;
     transform: translateY(0);
     transition:0.6s ease;
 }
 
-/* effetto “pressione busta” quando si apre */
+/* leggero movimento quando si apre */
 .envelope.open .container{
-    transform: translateY(6px);
+    transform: translateY(6px) scale(1.01);
 }
 
-/* flap migliorato */
+/* =========================
+   FLAP PIÙ “IMPORTANTE”
+========================= */
 .flap{
     position:absolute;
     top:0;
     left:0;
     width:100%;
-    height:240px;
+    height:260px;
 
-    background:
-        linear-gradient(145deg, #efe3cf, #e3d4b9);
+    background: linear-gradient(145deg, #f0e2cc, #ddcaa8);
 
     border-radius:18px 18px 0 0;
 
     transform-origin:top;
     transform:rotateX(0deg);
 
-    transition:1s cubic-bezier(.2,.8,.2,1);
+    transition:1.05s cubic-bezier(.2,.8,.2,1);
 
     z-index:10;
 
     box-shadow:
-        inset 0 -15px 25px rgba(0,0,0,0.12),
-        0 10px 20px rgba(0,0,0,0.15);
+        inset 0 -18px 30px rgba(0,0,0,0.12),
+        0 12px 25px rgba(0,0,0,0.18);
 }
 
-/* apertura più naturale (tipo lettera vera) */
 .envelope.open .flap{
-    transform:rotateX(165deg);
+    transform:rotateX(175deg);
     opacity:0.95;
 }
 
-/* leggero “lift” della busta */
-.envelope.open{
-    transform: scale(1.01);
+/* =========================
+   SIGILLO DI CERA
+========================= */
+.seal{
+    position:absolute;
+    top:185px;
+    left:50%;
+    transform:translateX(-50%) scale(1);
+
+    width:70px;
+    height:70px;
+
+    background: radial-gradient(circle at 30% 30%, #c94b3a, #8b1e1e);
+
+    border-radius:50%;
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.25),
+        inset 0 6px 10px rgba(255,255,255,0.2);
+
+    z-index:20;
+
     transition:0.6s ease;
 }
 
-/* bordo carta */
+/* quando si apre si “rompe” */
+.envelope.open .seal{
+    transform:translateX(-50%) scale(0.3);
+    opacity:0;
+}
+
+/* piccolo effetto croce cera */
+.seal::after{
+    content:"✶";
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:rgba(255,255,255,0.85);
+    font-size:26px;
+}
+
+/* =========================
+   CONTENUTO
+========================= */
 .container::before{
     content:"";
     position:absolute;
@@ -109,9 +147,6 @@ body{
     pointer-events:none;
 }
 
-/* =========================
-   UI
-========================= */
 .icon{
     font-size:58px;
 }
@@ -133,16 +168,12 @@ button{
     cursor:pointer;
 }
 
-/* =========================
-   STORY AREA
-========================= */
+/* STORY AREA */
 #storyArea{
     display:none;
 }
 
-/* =========================
-   POLAROID
-========================= */
+/* POLAROID */
 .polaroid{
     background:white;
     padding:14px 14px 40px;
@@ -175,9 +206,7 @@ button{
     font-style:italic;
 }
 
-/* =========================
-   TEXT
-========================= */
+/* TEXT */
 .storyBox{
     margin-top:25px;
     font-size:18px;
@@ -195,9 +224,7 @@ button{
     font-size:20px;
 }
 
-/* =========================
-   STAMP
-========================= */
+/* STAMP */
 .stamp{
     position:absolute;
     top:18px;
@@ -220,9 +247,7 @@ button{
     opacity:1;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 @media (max-width:768px){
 
     body{
@@ -231,7 +256,13 @@ button{
     }
 
     .flap{
-        height:200px;
+        height:210px;
+    }
+
+    .seal{
+        top:150px;
+        width:60px;
+        height:60px;
     }
 
     .polaroid{
@@ -247,6 +278,9 @@ button{
 <div class="envelope" id="envelope">
 
     <div class="flap"></div>
+
+    <!-- SIGILLO -->
+    <div class="seal"></div>
 
     <div class="container">
 
@@ -306,9 +340,9 @@ const tables = {
 title:"Le Tre Cime di Lavaredo",
 photo:"foto1.jpg",
 
-story:"Quattro ore di camminata sotto un sole cocente, chilometri e chilometri macinati passo dopo passo lungo uno dei percorsi più iconici delle Dolomiti. L’anello delle Tre Cime non regala nulla: si conquista. Tra salite, silenzi e panorami che tolgono il fiato, ogni passo è stato fatica… ma anche pura meraviglia.",
+story:"Quattro ore di camminata sotto un sole cocente, chilometri macinati lungo l’anello delle Tre Cime. Un percorso che non concede scorciatoie: solo fatica, respiro corto e silenzi enormi tra le montagne. E poi quel momento in cui ti fermi… e capisci che ne è valsa ogni singola goccia di sudore.",
 
-joke:"Il sole delle Dolomiti non perdona, ma ripaga con viste indimenticabili.",
+joke:"Il sole delle Dolomiti non perdona, ma ripaga con panorami che restano dentro.",
 
 stage:"1"
 }
@@ -322,7 +356,6 @@ document.getElementById("title").innerText = data.title;
 
 function startStory(){
 
-    // apertura busta più credibile
     document.getElementById("envelope").classList.add("open");
 
     document.getElementById("startButton").style.display = "none";
