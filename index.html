@@ -19,7 +19,6 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-
     background: radial-gradient(circle at top, #f5f1e6, #e7dec9);
     font-family: Georgia, serif;
 }
@@ -58,9 +57,8 @@ body{
 .container{
     max-width:800px;
     width:90%;
-
     background:#f6f1e4;
-    padding:30px 20px 60px;
+    padding:35px 25px 55px;
     text-align:center;
 
     border-radius:18px;
@@ -82,17 +80,17 @@ body{
     pointer-events:none;
 }
 
-/* ===== UI ORIGINALE ===== */
+/* ===== UI ===== */
 .icon{
     font-size:60px;
-    margin-top:20px;
+    margin-top:10px;
 }
 
 .subtitle{
     color:#666;
-    line-height:1.6;
     font-size:18px;
-    margin-bottom:30px;
+    margin-bottom:25px;
+    line-height:1.6;
 }
 
 button{
@@ -150,7 +148,7 @@ button{
 
 /* ===== JOKE ===== */
 .joke{
-    margin-top:20px;
+    margin-top:18px;
     font-size:21px;
     font-style:italic;
 }
@@ -190,6 +188,8 @@ button{
 <body>
 
 <div class="envelope" id="envelope">
+
+    <div class="flap"></div>
 
     <div class="container">
 
@@ -248,7 +248,7 @@ const tables = {
 1:{
 title:"Le Tre Cime di Lavaredo",
 photo:"foto1.jpg",
-story:"Questa foto è stata scattata durante una delle escursioni più famose che abbiamo affrontato insieme. Per completare il celebre anello delle Tre Cime abbiamo camminato per quasi quattro ore sotto un sole cocente.",
+story:"Questa foto è stata scattata durante una delle escursioni più famose che abbiamo affrontato insieme. Abbiamo camminato per ore tra panorami spettacolari e sole intenso.",
 joke:"Il sole delle Dolomiti non scherza.",
 stage:"1"
 }
@@ -262,7 +262,7 @@ document.getElementById("title").innerText = data.title;
 
 function startStory(){
 
-    // apri busta (ora funziona davvero)
+    // apre la busta
     document.getElementById("envelope").classList.add("open");
 
     document.getElementById("startButton").style.display = "none";
