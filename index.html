@@ -19,142 +19,123 @@ html, body{
     margin:0;
     padding:0;
     font-family: Georgia, serif;
-    background:#f3efe6;
-    color:#333;
+    background:#0f0f0f;
+    color:#fff;
 }
 
 /* =========================
-   HEADER
+   HERO INTRO
 ========================= */
-.header{
+.hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
     text-align:center;
-    padding:60px 20px 20px;
+    padding:20px;
+
+    background:
+        linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)),
+        url('foto1.jpg');
+    background-size:cover;
+    background-position:center;
 }
 
-.header h1{
-    font-size:34px;
+.hero h1{
+    font-size:42px;
     margin:0;
 }
 
-.header p{
-    font-size:18px;
-    color:#666;
+.hero p{
     margin-top:10px;
+    font-size:18px;
+    opacity:0.8;
 }
 
 /* =========================
-   WALL
+   SECTION
 ========================= */
-.wall{
-    max-width:1100px;
-    margin:0 auto;
-    padding:30px 20px 120px;
-
+.section{
+    min-height:100vh;
     display:flex;
-    flex-wrap:wrap;
+    align-items:center;
     justify-content:center;
-    gap:28px;
-}
-
-/* =========================
-   POLAROID CARD
-========================= */
-.polaroid{
-    width:280px;
-    background:white;
-    padding:15px 15px 42px;
-    border-radius:6px;
-
-    box-shadow:0 12px 28px rgba(0,0,0,0.18);
-
-    transform: translateY(40px) rotate(var(--r, 0deg));
-    opacity:0;
-
-    transition: all 0.8s ease;
     position:relative;
+    padding:60px 20px;
 }
 
-/* stato visibile */
-.polaroid.show{
-    transform: translateY(0) rotate(var(--r, 0deg));
+/* immagine di sfondo */
+.section::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    filter:brightness(0.5);
+    transform:scale(1.05);
+}
+
+/* contenuto */
+.content{
+    position:relative;
+    max-width:700px;
+    text-align:center;
+    z-index:2;
+    opacity:0;
+    transform:translateY(30px);
+    transition:0.8s ease;
+}
+
+/* attivo */
+.section.active .content{
     opacity:1;
-}
-
-/* hover leggero */
-.polaroid:hover{
-    transform: scale(1.04) rotate(0deg);
-}
-
-/* immagine */
-.polaroid img{
-    width:100%;
-    height:200px;
-    object-fit:cover;
-    border-radius:4px;
-    display:block;
+    transform:translateY(0);
 }
 
 /* titolo */
-.title{
-    font-size:16px;
-    font-weight:bold;
-    margin-top:12px;
-    text-align:center;
+.content h2{
+    font-size:34px;
+    margin-bottom:10px;
 }
 
-/* caption */
-.caption{
-    margin-top:10px;
-    font-size:14px;
-    color:#666;
-    font-style:italic;
-    text-align:center;
-}
-
-/* =========================
-   STORY BLOCK
-========================= */
-.story{
-    max-width:850px;
-    margin:80px auto;
-    padding:0 20px;
-
+/* testo */
+.content p{
     font-size:20px;
-    line-height:1.8;
-    text-align:center;
-}
-
-.story p{
-    margin-bottom:25px;
+    line-height:1.7;
+    opacity:0.9;
 }
 
 /* separatore */
-.separator{
-    width:70px;
+.divider{
+    width:80px;
     height:2px;
-    background:#c2b49a;
-    margin:30px auto;
-    opacity:0.7;
+    background:#caa76a;
+    margin:20px auto;
 }
+
+/* =========================
+   BACKGROUND PER SEZIONI
+========================= */
+#s1::before{ background-image:url('foto1.jpg'); }
+#s2::before{ background-image:url('foto2.jpg'); }
+#s3::before{ background-image:url('foto3.jpg'); }
 
 /* =========================
    MOBILE
 ========================= */
 @media (max-width:768px){
 
-    .header h1{
+    .hero h1{
+        font-size:30px;
+    }
+
+    .content h2{
         font-size:26px;
     }
 
-    .polaroid{
-        width:90%;
-    }
-
-    .polaroid img{
-        height:220px;
-    }
-
-    .story{
+    .content p{
         font-size:18px;
     }
 }
@@ -164,78 +145,67 @@ html, body{
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
+<!-- HERO -->
+<div class="hero">
     <h1>La Nostra Storia</h1>
-    <p>Ogni ricordo emerge quando sei pronto a vederlo</p>
+    <p>Non si guarda. Si attraversa.</p>
 </div>
 
-<!-- WALL -->
-<div class="wall">
-
-    <div class="polaroid" style="--r:-2deg">
-        <img src="foto1.jpg">
-        <div class="title">Le Tre Cime di Lavaredo</div>
-        <div class="caption">4 ore sotto il sole cocente</div>
+<!-- SEZIONE 1 -->
+<div class="section" id="s1">
+    <div class="content">
+        <h2>Le Tre Cime di Lavaredo</h2>
+        <div class="divider"></div>
+        <p>
+            Quattro ore di camminata sotto un sole cocente.
+            Un anello che non perdona, fatto di salite e silenzi.
+        </p>
     </div>
-
-    <div class="polaroid" style="--r:2deg">
-        <img src="foto2.jpg">
-        <div class="title">Sentiero del Silenzio</div>
-        <div class="caption">Passi lenti, aria leggera</div>
-    </div>
-
-    <div class="polaroid" style="--r:-1deg">
-        <img src="foto3.jpg">
-        <div class="title">Il Tramonto in quota</div>
-        <div class="caption">Quando il cielo si è fermato</div>
-    </div>
-
 </div>
 
-<!-- STORY -->
-<div class="story">
+<!-- SEZIONE 2 -->
+<div class="section" id="s2">
+    <div class="content">
+        <h2>Il ritmo del sentiero</h2>
+        <div class="divider"></div>
+        <p>
+            Passo dopo passo, tutto si riduce al respiro.
+            Il mondo fuori smette di esistere.
+        </p>
+    </div>
+</div>
 
-    <p>
-        Quattro ore di camminata sotto un sole cocente, chilometri macinati
-        lungo l’anello delle Tre Cime.
-    </p>
-
-    <div class="separator"></div>
-
-    <p>
-        Un percorso che non concede scorciatoie: solo salita, respiro corto
-        e silenzi enormi tra le montagne.
-    </p>
-
-    <div class="separator"></div>
-
-    <p>
-        E poi quel momento in cui ti fermi e capisci che ogni passo
-        era esattamente quello giusto.
-    </p>
-
+<!-- SEZIONE 3 -->
+<div class="section" id="s3">
+    <div class="content">
+        <h2>Il momento finale</h2>
+        <div class="divider"></div>
+        <p>
+            Quando arrivi in cima non c’è più fatica.
+            Solo spazio. E silenzio.
+        </p>
+    </div>
 </div>
 
 <script>
 
 /* =========================
-   INTERSECTION OBSERVER
+   SCROLL ANIMATION
 ========================= */
-const cards = document.querySelectorAll('.polaroid');
+const sections = document.querySelectorAll('.section');
 
 const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
         if(entry.isIntersecting){
-            entry.target.classList.add('show');
+            entry.target.classList.add('active');
         }
     });
 },{
-    threshold:0.2
+    threshold:0.4
 });
 
-cards.forEach(card=>{
-    observer.observe(card);
+sections.forEach(s=>{
+    observer.observe(s);
 });
 
 </script>
