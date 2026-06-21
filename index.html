@@ -127,6 +127,9 @@ Scopri il ricordo
 <div class="thanks">
 <div class="heart">❤️</div>
 Grazie per essere parte del nostro viaggio
+
+<div id="stage" style="margin-top:15px;font-size:18px;"></div>
+
 </div>
 
 </div>
@@ -172,6 +175,8 @@ typeWriter(data.story);
 
 setTimeout(()=>{
     document.getElementById("joke").innerHTML="😄 " + data.joke;
+    document.getElementById("stage").innerHTML =
+"Ricordo " + data.stage + " di 15";
 },3500);
 
 }
