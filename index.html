@@ -122,13 +122,25 @@ Scopri il ricordo
 
 <div id="story" class="storyBox"></div>
 
-<div id="joke" class="joke"></div>
+<div id="joke" class="joke" style="display:none;"></div>
 
-<div class="thanks">
+<div id="thanks" class="thanks" style="display:none;">
 <div class="heart">❤️</div>
 Grazie per essere parte del nostro viaggio
 
-<div id="stage" style="margin-top:15px;font-size:18px;"></div>
+<div id="stage"
+style="
+margin-top:20px;
+display:inline-block;
+padding:10px 18px;
+border:2px solid #b23a2f;
+color:#b23a2f;
+font-weight:bold;
+border-radius:8px;
+transform:rotate(-4deg);
+font-size:18px;">
+</div>
+</div>
 
 </div>
 
@@ -159,45 +171,74 @@ document.getElementById("title").innerText = data.title;
 
 function startStory(){
 
-document.getElementById("startButton").style.display="none";
+    document.getElementById("startButton").style.display = "none";
 
-document.getElementById("storyArea").style.display="block";
+    document.getElementById("storyArea").style.display = "block";
 
-const photo=document.getElementById("photo");
+    const photo = document.getElementById("photo");
 
-photo.src=data.photo;
+    photo.src = data.photo;
 
-setTimeout(()=>{
-    photo.classList.add("visible");
-},200);
+    setTimeout(()=>{
+        photo.classList.add("visible");
+    },200);
 
-typeWriter(data.story);
+    typeWriter(data.story, function(){
 
-setTimeout(()=>{
-    document.getElementById("joke").innerHTML="😄 " + data.joke;
-    document.getElementById("stage").innerHTML =
-"Ricordo " + data.stage + " di 15";
-},3500);
+        setTimeout(()=>{
+
+            const joke = document.getElementById("joke");
+
+            joke.style.display = "block";
+
+            joke.innerHTML = "😄 " + data.joke;
+
+            setTimeout(()=>{
+
+                document.getElementById("thanks").style.display = "block";
+
+                setTimeout(()=>{
+
+                    document.getElementById("stage").innerHTML =
+                    "🏔️ Ricordo " + data.stage + " di 15";
+
+                },1000);
+
+            },1200);
+
+        },800);
+
+    });
 
 }
 
-function typeWriter(text){
+function typeWriter(text, callback){
 
-let i=0;
+let i = 0;
 
-const speed=35;
+const speed = 35;
+
+const storyElement = document.getElementById("story");
+
+storyElement.innerHTML = "";
 
 function typing(){
 
-if(i<text.length){
+    if(i < text.length){
 
-document.getElementById("story").innerHTML += text.charAt(i);
+        storyElement.innerHTML += text.charAt(i);
 
-i++;
+        i++;
 
-setTimeout(typing,speed);
+        setTimeout(typing, speed);
 
-}
+    } else {
+
+        if(callback){
+            callback();
+        }
+
+    }
 
 }
 
