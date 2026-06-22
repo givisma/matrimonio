@@ -1,212 +1,240 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>La Nostra Storia</title>
+<title>I Nostri Ricordi</title>
 
 <style>
 
-/* =========================
-   BASE
-========================= */
 *{
     box-sizing:border-box;
-}
-
-html, body{
     margin:0;
     padding:0;
-    font-family: Georgia, serif;
-    background:#0f0f0f;
-    color:#fff;
 }
 
-/* =========================
-   HERO INTRO
-========================= */
-.hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-    padding:20px;
-
-    background:
-        linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)),
-        url('foto1.jpg');
-    background-size:cover;
-    background-position:center;
-}
-
-.hero h1{
-    font-size:42px;
-    margin:0;
-}
-
-.hero p{
-    margin-top:10px;
-    font-size:18px;
-    opacity:0.8;
-}
-
-/* =========================
-   SECTION
-========================= */
-.section{
+body{
+    font-family:Georgia, serif;
+    background:#f8f5ef;
+    color:#333;
     min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    padding:60px 20px;
 }
 
-/* immagine di sfondo */
-.section::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-size:cover;
-    background-position:center;
-    filter:brightness(0.5);
-    transform:scale(1.05);
+.screen{
+    display:none;
+    max-width:900px;
+    margin:auto;
+    padding:30px 20px 60px;
 }
 
-/* contenuto */
-.content{
-    position:relative;
-    max-width:700px;
+.screen.active{
+    display:block;
+}
+
+h1{
     text-align:center;
-    z-index:2;
-    opacity:0;
-    transform:translateY(30px);
-    transition:0.8s ease;
+    margin-bottom:15px;
 }
 
-/* attivo */
-.section.active .content{
-    opacity:1;
-    transform:translateY(0);
+.subtitle{
+    text-align:center;
+    color:#666;
+    line-height:1.6;
+    margin-bottom:35px;
 }
 
-/* titolo */
-.content h2{
-    font-size:34px;
-    margin-bottom:10px;
+.tables{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:12px;
 }
 
-/* testo */
-.content p{
+.table-btn{
+    border:none;
+    background:white;
+    padding:16px;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:16px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.table-btn:hover{
+    transform:translateY(-2px);
+}
+
+.photo{
+    width:100%;
+    border-radius:20px;
+    margin-bottom:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.location{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.thanks{
+    text-align:center;
+    line-height:1.8;
     font-size:20px;
-    line-height:1.7;
-    opacity:0.9;
+    max-width:700px;
+    margin:auto;
 }
 
-/* separatore */
-.divider{
-    width:80px;
-    height:2px;
-    background:#caa76a;
-    margin:20px auto;
+.counter{
+    margin-top:30px;
+    text-align:center;
+    color:#777;
 }
 
-/* =========================
-   BACKGROUND PER SEZIONI
-========================= */
-#s1::before{ background-image:url('foto1.jpg'); }
-#s2::before{ background-image:url('foto2.jpg'); }
-#s3::before{ background-image:url('foto3.jpg'); }
+.actions{
+    text-align:center;
+    margin-top:35px;
+}
 
-/* =========================
-   MOBILE
-========================= */
-@media (max-width:768px){
+.back-btn{
+    border:none;
+    background:#6f8f72;
+    color:white;
+    padding:14px 24px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:16px;
+}
 
-    .hero h1{
-        font-size:30px;
-    }
+@media(max-width:768px){
 
-    .content h2{
+    .location{
         font-size:26px;
     }
 
-    .content p{
+    .thanks{
         font-size:18px;
     }
+
 }
 
 </style>
-</head>
 
+</head>
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <h1>La Nostra Storia</h1>
-    <p>Non si guarda. Si attraversa.</p>
+<!-- HOME -->
+
+<div id="home" class="screen active">
+
+```
+<h1>❤️ Benvenuti</h1>
+
+<div class="subtitle">
+    Oggi celebriamo uno dei giorni più importanti della nostra vita.<br><br>
+
+    Ogni tavolo è dedicato a un luogo speciale che ha segnato il nostro cammino insieme.<br><br>
+
+    Seleziona il tavolo in cui sei seduto per scoprire il ricordo associato.
 </div>
 
-<!-- SEZIONE 1 -->
-<div class="section" id="s1">
-    <div class="content">
-        <h2>Le Tre Cime di Lavaredo</h2>
-        <div class="divider"></div>
-        <p>
-            Quattro ore di camminata sotto un sole cocente.
-            Un anello che non perdona, fatto di salite e silenzi.
-        </p>
-    </div>
+<div class="tables" id="tablesList"></div>
+```
+
 </div>
 
-<!-- SEZIONE 2 -->
-<div class="section" id="s2">
-    <div class="content">
-        <h2>Il ritmo del sentiero</h2>
-        <div class="divider"></div>
-        <p>
-            Passo dopo passo, tutto si riduce al respiro.
-            Il mondo fuori smette di esistere.
-        </p>
-    </div>
+<!-- DETTAGLIO -->
+
+<div id="detail" class="screen">
+
+```
+<img id="photo" class="photo">
+
+<div id="location" class="location"></div>
+
+<div class="thanks">
+    ❤️<br><br>
+
+    Grazie per aver scelto di condividere con noi questo giorno così speciale.
+
+    La vostra presenza rende questo momento ancora più bello e indimenticabile.
 </div>
 
-<!-- SEZIONE 3 -->
-<div class="section" id="s3">
-    <div class="content">
-        <h2>Il momento finale</h2>
-        <div class="divider"></div>
-        <p>
-            Quando arrivi in cima non c’è più fatica.
-            Solo spazio. E silenzio.
-        </p>
-    </div>
+<div id="counter" class="counter"></div>
+
+<div class="actions">
+    <button class="back-btn" onclick="goHome()">
+        Torna ai tavoli
+    </button>
+</div>
+```
+
 </div>
 
 <script>
 
-/* =========================
-   SCROLL ANIMATION
-========================= */
-const sections = document.querySelectorAll('.section');
+const tables = {
 
-const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.classList.add('active');
-        }
-    });
-},{
-    threshold:0.4
+1:{
+title:"Le Tre Cime di Lavaredo",
+photo:"foto1.jpg"
+},
+
+2:{
+title:"Lago di Braies",
+photo:"foto2.jpg"
+},
+
+3:{
+title:"Cinque Terre",
+photo:"foto3.jpg"
+},
+
+4:{
+title:"Val di Funes",
+photo:"foto4.jpg"
+}
+
+};
+
+const tablesList = document.getElementById("tablesList");
+
+Object.keys(tables).forEach(key=>{
+
+    const btn = document.createElement("button");
+
+    btn.className = "table-btn";
+
+    btn.innerHTML = "Tavolo " + key;
+
+    btn.onclick = ()=>openTable(key);
+
+    tablesList.appendChild(btn);
+
 });
 
-sections.forEach(s=>{
-    observer.observe(s);
-});
+function openTable(id){
+
+    document.getElementById("home").classList.remove("active");
+    document.getElementById("detail").classList.add("active");
+
+    document.getElementById("photo").src =
+    tables[id].photo;
+
+    document.getElementById("location").innerHTML =
+    tables[id].title;
+
+    document.getElementById("counter").innerHTML =
+    "📍 Ricordo " + id + " di " + Object.keys(tables).length;
+}
+
+function goHome(){
+
+    document.getElementById("detail").classList.remove("active");
+    document.getElementById("home").classList.add("active");
+
+}
 
 </script>
 
