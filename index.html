@@ -1,241 +1,248 @@
 <!DOCTYPE html>
-
 <html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ilaria ✦ Gianluca</title>
 
-<title>I Nostri Ricordi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-    font-family:Georgia, serif;
-    background:#f8f5ef;
-    color:#333;
+    font-family:'Inter',sans-serif;
+    background:linear-gradient(180deg,#faf7f1 0%,#f3eee4 100%);
+    color:#4b4b4b;
     min-height:100vh;
 }
 
-.screen{
-    display:none;
-    max-width:900px;
+.screen{display:none;}
+.screen.active{display:block;}
+
+.home{
+    max-width:950px;
     margin:auto;
-    padding:30px 20px 60px;
-}
-
-.screen.active{
-    display:block;
-}
-
-h1{
+    padding:60px 20px 80px;
     text-align:center;
-    margin-bottom:15px;
+}
+
+.names{
+    font-family:'Cormorant Garamond',serif;
+    font-size:42px;
+    color:#8f7750;
+    margin-bottom:10px;
+}
+
+.title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:50px;
+    color:#2f2f2f;
+    margin-bottom:25px;
 }
 
 .subtitle{
-    text-align:center;
+    max-width:700px;
+    margin:auto;
     color:#666;
-    line-height:1.6;
-    margin-bottom:35px;
+    line-height:1.8;
+    font-size:17px;
 }
 
 .tables{
+    margin-top:50px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:12px;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:16px;
 }
 
-.table-btn{
-    border:none;
+.table-card{
     background:white;
-    padding:16px;
-    border-radius:14px;
+    border:1px solid rgba(184,155,94,.25);
+    border-radius:18px;
+    padding:22px;
     cursor:pointer;
-    font-size:16px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    transition:.25s;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
 }
 
-.table-btn:hover{
-    transform:translateY(-2px);
+.table-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px rgba(0,0,0,.08);
+}
+
+.table-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px;
+}
+
+.detail{
+    max-width:950px;
+    margin:auto;
+    padding:35px 20px 60px;
+}
+
+.back{
+    border:none;
+    background:none;
+    color:#8f7750;
+    cursor:pointer;
+    font-size:15px;
+    margin-bottom:25px;
+}
+
+.place-title{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:48px;
+    margin-bottom:25px;
+    color:#2f2f2f;
 }
 
 .photo{
     width:100%;
-    border-radius:20px;
-    margin-bottom:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    height:60vh;
+    object-fit:cover;
+    border-radius:24px;
+    display:block;
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
 }
 
-.location{
+.message{
     text-align:center;
-    font-size:32px;
-    margin-bottom:25px;
-}
-
-.thanks{
-    text-align:center;
-    line-height:1.8;
-    font-size:20px;
-    max-width:700px;
-    margin:auto;
+    max-width:650px;
+    margin:40px auto 0;
+    line-height:1.9;
+    font-size:18px;
+    color:#555;
 }
 
 .counter{
-    margin-top:30px;
     text-align:center;
-    color:#777;
+    margin-top:30px;
+    color:#8f7750;
+    letter-spacing:1px;
+    font-size:14px;
 }
 
-.actions{
+.explore{
     text-align:center;
     margin-top:35px;
 }
 
-.back-btn{
-    border:none;
-    background:#6f8f72;
+.explore button{
+    background:#8f7750;
     color:white;
-    padding:14px 24px;
+    border:none;
     border-radius:999px;
+    padding:14px 26px;
+    font-size:15px;
     cursor:pointer;
-    font-size:16px;
 }
 
 @media(max-width:768px){
-
-    .location{
-        font-size:26px;
-    }
-
-    .thanks{
-        font-size:18px;
-    }
-
+    .names{font-size:34px;}
+    .title{font-size:38px;}
+    .place-title{font-size:36px;}
+    .photo{height:42vh;}
+    .message{font-size:16px;}
 }
-
 </style>
-
 </head>
+
 <body>
 
-<!-- HOME -->
-
 <div id="home" class="screen active">
+    <div class="home">
 
-```
-<h1>❤️ Benvenuti</h1>
+        <div class="names">Ilaria ✦ Gianluca</div>
 
-<div class="subtitle">
-    Oggi celebriamo uno dei giorni più importanti della nostra vita.<br><br>
+        <div class="title">Benvenuti al nostro matrimonio</div>
 
-    Ogni tavolo è dedicato a un luogo speciale che ha segnato il nostro cammino insieme.<br><br>
+        <div class="subtitle">
+            Ogni tavolo è dedicato a un luogo che conserva
+            un ricordo speciale della nostra storia.
+            <br><br>
+            Seleziona il tuo tavolo e scopri il ricordo che gli abbiamo dedicato.
+        </div>
 
-    Seleziona il tavolo in cui sei seduto per scoprire il ricordo associato.
+        <div id="tables" class="tables"></div>
+
+    </div>
 </div>
-
-<div class="tables" id="tablesList"></div>
-```
-
-</div>
-
-<!-- DETTAGLIO -->
 
 <div id="detail" class="screen">
+    <div class="detail">
 
-```
-<img id="photo" class="photo">
+        <button class="back" onclick="goHome()">← Torna ai tavoli</button>
 
-<div id="location" class="location"></div>
+        <div id="placeTitle" class="place-title"></div>
 
-<div class="thanks">
-    ❤️<br><br>
+        <img id="photo" class="photo" src="">
 
-    Grazie per aver scelto di condividere con noi questo giorno così speciale.
+        <div class="message">
+            Grazie per essere qui con noi.
+            <br><br>
+            Avere accanto le persone che amiamo rende questo giorno ancora più speciale.
+        </div>
 
-    La vostra presenza rende questo momento ancora più bello e indimenticabile.
-</div>
+        <div id="counter" class="counter"></div>
 
-<div id="counter" class="counter"></div>
+        <div class="explore">
+            <button onclick="goHome()">Scopri gli altri ricordi</button>
+        </div>
 
-<div class="actions">
-    <button class="back-btn" onclick="goHome()">
-        Torna ai tavoli
-    </button>
-</div>
-```
-
+    </div>
 </div>
 
 <script>
+const tables = [
+"Lago Di Antermoia",
+"Torri Del Vajolet",
+"Lago Di Misurina",
+"Lago Di Carezza",
+"Lago Di Braies",
+"Cinque Torri",
+"Rifugio Puez",
+"Seceda",
+"Marmolada",
+"Cadini Di Misurina",
+"Rifugio Vicenza",
+"Lago Di Sorapis",
+"Vallunga",
+"Sassolungo e Sassopiatto",
+"Tre Cime Di Lavaredo",
+"Pale Di San Martino"
+];
 
-const tables = {
+const container = document.getElementById("tables");
 
-1:{
-title:"Le Tre Cime di Lavaredo",
-photo:"foto1.jpg"
-},
-
-2:{
-title:"Lago di Braies",
-photo:"foto2.jpg"
-},
-
-3:{
-title:"Cinque Terre",
-photo:"foto3.jpg"
-},
-
-4:{
-title:"Val di Funes",
-photo:"foto4.jpg"
-}
-
-};
-
-const tablesList = document.getElementById("tablesList");
-
-Object.keys(tables).forEach(key=>{
-
-    const btn = document.createElement("button");
-
-    btn.className = "table-btn";
-
-    btn.innerHTML = "Tavolo " + key;
-
-    btn.onclick = ()=>openTable(key);
-
-    tablesList.appendChild(btn);
-
+tables.forEach((name,index)=>{
+    const card=document.createElement("div");
+    card.className="table-card";
+    card.innerHTML=`<div class="table-name">${name}</div>`;
+    card.onclick=()=>openTable(index);
+    container.appendChild(card);
 });
 
-function openTable(id){
-
+function openTable(index){
     document.getElementById("home").classList.remove("active");
     document.getElementById("detail").classList.add("active");
 
-    document.getElementById("photo").src =
-    tables[id].photo;
+    document.getElementById("placeTitle").innerText=tables[index];
+    document.getElementById("photo").src=`foto${index+1}.jpg`;
+    document.getElementById("counter").innerHTML=`✦ Ricordo ${index+1} di ${tables.length} ✦`;
 
-    document.getElementById("location").innerHTML =
-    tables[id].title;
-
-    document.getElementById("counter").innerHTML =
-    "📍 Ricordo " + id + " di " + Object.keys(tables).length;
+    window.scrollTo(0,0);
 }
 
 function goHome(){
-
     document.getElementById("detail").classList.remove("active");
     document.getElementById("home").classList.add("active");
-
+    window.scrollTo(0,0);
 }
-
 </script>
 
 </body>
